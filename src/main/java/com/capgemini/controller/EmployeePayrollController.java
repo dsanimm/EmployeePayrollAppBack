@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import com.capgemini.model.EmployeePayrollData;
 import com.capgemini.service.IEmployeePayrollService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/employeepayrollservice")
 public class EmployeePayrollController {
 	@Autowired
@@ -30,6 +32,11 @@ public class EmployeePayrollController {
 		empDataList = employeePayrollService.getEmployeeData();
 		ResponseDTO respDTO = new ResponseDTO("Get Call Success !", empDataList);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
+	}
+
+	@GetMapping("/get/getall")
+	public List<EmployeePayrollData> getAllEmployeePayrollList() {
+		return employeePayrollService.getEmployeeData();
 	}
 
 	@GetMapping("/get/{empId}")
