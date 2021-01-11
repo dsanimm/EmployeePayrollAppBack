@@ -17,20 +17,24 @@ import org.springframework.web.bind.annotation.RestController;
 import com.capgemini.dto.EmployeePayrollDTO;
 import com.capgemini.dto.ResponseDTO;
 import com.capgemini.model.EmployeePayrollData;
+import com.capgemini.service.EmailService;
 import com.capgemini.service.IEmployeePayrollService;
 
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/employeepayrollservice")
 public class EmployeePayrollController {
 	@Autowired
 	private IEmployeePayrollService employeePayrollService;
+	@Autowired
+	private EmailService emailService;
 
 	@RequestMapping(value = { "", "/", "/get" })
 	public ResponseEntity<ResponseDTO> getEmployeePayrollData() {
 		List<EmployeePayrollData> empDataList = null;
 		empDataList = employeePayrollService.getEmployeeData();
 		ResponseDTO respDTO = new ResponseDTO("Get Call Success !", empDataList);
+		//emailService.sendSimpleMessage("dsanimm@gmail.com", "kya baat", "kya baat hai");
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
 	}
 
@@ -47,7 +51,7 @@ public class EmployeePayrollController {
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
 	}
 
-	@PostMapping("/create")
+	@PostMapping("")
 	public ResponseEntity<ResponseDTO> addEmployeePayrollData(@RequestBody EmployeePayrollDTO employeePayrollDTO) {
 		EmployeePayrollData empData = null;
 		empData = employeePayrollService.createEmployeePayrollData(employeePayrollDTO);

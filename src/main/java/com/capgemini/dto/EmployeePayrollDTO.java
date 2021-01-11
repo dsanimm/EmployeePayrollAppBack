@@ -1,6 +1,6 @@
 package com.capgemini.dto;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,10 +13,10 @@ public class EmployeePayrollDTO {
 		public String[] department;
 		public double salary;
 		public String note;
-		public Date startDate;
+		public String startDate;
 
 		public EmployeePayrollDTO(String name, String profilePic, String gender, String[] department, double salary,
-				String note, Date startDate) throws ValidationException {
+				String note, String startDate) throws ValidationException {
 			super();
 			this.setName(name);
 			this.profilePic = profilePic;
@@ -42,18 +42,11 @@ public class EmployeePayrollDTO {
 				this.name = name;
 		}
 
-		public Date getStartDate() {
+		public String getStartDate() {
 			return startDate;
 		}
 
-		public void setStartDate(Date startDate) throws ValidationException {
-			if (startDate.after(new Date())) {
-				throw new ValidationException("Date is A Future Date !");
-			}
-			long diff = Math.abs(new Date().getTime() - startDate.getTime());
-			if (diff / (1000 * 60 * 60 * 24) > 30) {
-				throw new ValidationException("Date is Not Within 30 Days !");
-			}
+		public void setStartDate(String startDate) throws ValidationException {
 			this.startDate = startDate;
 		}
 

@@ -1,29 +1,41 @@
 package com.capgemini.model;
 
-import java.util.Date;
 
+import java.sql.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.capgemini.dto.EmployeePayrollDTO;
 
 
 @Entity
-@Table(name = "EMPLOYEES")
+@Table(name = "employee_payroll")
 public class EmployeePayrollData {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "Id")
 	private int employeeId;
+	@Column(name = "Name")
 	private String name;
+	@Column(name = "profilePic")
 	private String profilePic;
+	@Column(name = "gender")
 	private String gender;
+	@Column(name = "department")
 	private String[] department;
+	@Column(name = "salary")
 	private double salary;
+	@Column(name = "note")
 	private String note;
-	private Date startDate;
+	@Column(name = "start")
+	private String startDate;
+
 
 	public EmployeePayrollData() {
 
@@ -37,7 +49,7 @@ public class EmployeePayrollData {
 		this.gender = employeePayrollDto.gender;
 		this.department = employeePayrollDto.department;
 		this.note = employeePayrollDto.note;
-		this.startDate = employeePayrollDto.startDate;
+		this.startDate =  employeePayrollDto.startDate;
 	}
 
 	public EmployeePayrollData(int employeeId, EmployeePayrollDTO employeePayrollDto) {
@@ -49,7 +61,7 @@ public class EmployeePayrollData {
 		this.gender = employeePayrollDto.gender;
 		this.department = employeePayrollDto.department;
 		this.note = employeePayrollDto.note;
-		this.startDate = employeePayrollDto.startDate;
+		this.startDate =  employeePayrollDto.startDate;
 	}
 
 	public int getEmployeeId() {
@@ -108,11 +120,11 @@ public class EmployeePayrollData {
 		this.note = note;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 }
