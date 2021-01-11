@@ -11,9 +11,6 @@ public class EmployeePayrollAppApplication extends SpringBootServletInitializer{
 	  protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 	    return application.sources(EmployeePayrollAppApplication.class);
 	  }
-
-
-	
 	public static void main(String[] args) {
 		SpringApplication.run(EmployeePayrollAppApplication.class, args);
 	}

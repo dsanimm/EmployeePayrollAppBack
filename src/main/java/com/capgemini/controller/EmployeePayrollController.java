@@ -20,7 +20,7 @@ import com.capgemini.model.EmployeePayrollData;
 import com.capgemini.service.EmailService;
 import com.capgemini.service.IEmployeePayrollService;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8443")
 @RestController
 @RequestMapping("/employeepayrollservice")
 public class EmployeePayrollController {
