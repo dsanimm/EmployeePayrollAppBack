@@ -34,7 +34,8 @@ public class EmployeePayrollController {
 		List<EmployeePayrollData> empDataList = null;
 		empDataList = employeePayrollService.getEmployeeData();
 		ResponseDTO respDTO = new ResponseDTO("Get Call Success !", empDataList);
-		//emailService.sendSimpleMessage("dsanimm@gmail.com", "kya baat", "kya baat hai");
+		
+		//System.out.println("heehoo");
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
 	}
 
