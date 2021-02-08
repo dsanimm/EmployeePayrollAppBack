@@ -74,6 +74,7 @@ public class EmployeePayrollController {
 		employeePayrollService.deleteEmployeePayrollDataById(empId);
 		ResponseDTO respDTO = new ResponseDTO("Deleted Employee Payroll Data Successfully !", "Deleted Id : " + empId);
 		return new ResponseEntity<ResponseDTO>(respDTO, HttpStatus.OK);
+//
 	}
 
 }
