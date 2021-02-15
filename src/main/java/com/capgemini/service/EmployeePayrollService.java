@@ -3,46 +3,55 @@ package com.capgemini.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.dto.EmployeePayrollDTO;
 import com.capgemini.model.EmployeePayrollData;
+import com.capgemini.repository.EmployeePayrollRepository;
 
 @Service
 public class EmployeePayrollService implements IEmployeePayrollService {
 
+	@Autowired
+	private EmployeePayrollRepository empRepo;
+
 	@Override
 	public List<EmployeePayrollData> getEmployeeData() {
-		List<EmployeePayrollData> empList = new ArrayList<>();
-		EmployeePayrollData empData = new EmployeePayrollData(1, new EmployeePayrollDTO("Deepanshu", 50000.00));
-		empList.add(empData);
-		return empList;
+		return empRepo.findAll();
 	}
 
 	@Override
 	public EmployeePayrollData getEmployeePayrollDataById(int empId) {
-		EmployeePayrollData empData = null;
-		empData = new EmployeePayrollData(1, new EmployeePayrollDTO("Deepanshu", 50000.00));
-		return empData;
+		return empRepo.findById(empId).get();
 	}
 
 	@Override
 	public EmployeePayrollData createEmployeePayrollData(EmployeePayrollDTO empDto) {
 		EmployeePayrollData empData = null;
-		empData = new EmployeePayrollData(1, empDto);
+		empData = new EmployeePayrollData(empDto);
+		empRepo.save(empData);
 		return empData;
 	}
 
 	@Override
-	public EmployeePayrollData updateEmployeePayrollData(EmployeePayrollDTO empDto) {
+	public EmployeePayrollData updateEmployeePayrollData(int id, EmployeePayrollDTO empDto) {
 		EmployeePayrollData empData = null;
-		empData = new EmployeePayrollData(1, empDto);
+		empData = this.getEmployeePayrollDataById(id);
+		empData.setName(empDto.name);
+		empData.setGender(empDto.gender);
+		empData.setDepartment(empDto.department);
+		empData.setProfilePic(empDto.profilePic);
+		empData.setNote(empDto.note);
+		empData.setSalary(empDto.salary);
+		empData.setStartDate(empDto.startDate);
+		empRepo.save(empData);
 		return empData;
 	}
 
 	@Override
 	public void deleteEmployeePayrollDataById(int empId) {
-		// TODO Auto-generated method stub
+		empRepo.deleteById(empId);
 	}
 
 }
